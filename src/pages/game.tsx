@@ -35,7 +35,7 @@ export function Game() {
         </div>
 
         {/* Saldo dos Usuários */}
-        <div className="flex gap-3 overflow-x-auto scrollbar-none">
+        <div className="flex gap-3 overflow-x-auto">
           {players
             .sort((a, b) => (a.balance > b.balance ? -1 : 1))
             .map((player, index) => (

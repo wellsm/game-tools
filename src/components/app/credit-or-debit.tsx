@@ -1,9 +1,4 @@
-import {
-  Minus,
-  Plus,
-  TrendingDown,
-  TrendingUp,
-} from "lucide-react";
+import { Minus, Plus, TrendingDown, TrendingUp } from "lucide-react";
 import {
   Sheet,
   SheetContent,
@@ -52,7 +47,8 @@ export function CreditOrDebit({ players, type }: Props) {
   });
 
   const onSubmit = ({ player: id, balance }: z.infer<typeof formSchema>) => {
-    const player: IPlayer = players.filter(p => p.active).find((p) => p.id === Number(id)) as IPlayer;
+    const player: IPlayer = players
+      .find((p) => p.id === id) as IPlayer;
 
     updatePlayer({
       ...player,
@@ -158,20 +154,24 @@ export function CreditOrDebit({ players, type }: Props) {
                     className="grid grid-cols-2"
                     onValueChange={field.onChange}
                   >
-                    {players.filter(p => p.active).map((player) => (
-                      <Label
-                        htmlFor={`player-radio-${player.id}`}
-                        key={`label-player-radio-${player.id}`}
-                      >
-                        <div className="flex items-center space-x-3 border p-5">
-                          <RadioGroupItem
-                            id={`player-radio-${player.id}`}
-                            value={player.id.toString()}
-                          />
-                          <span className="text-foreground">{player.name}</span>
-                        </div>
-                      </Label>
-                    ))}
+                    {players
+                      .filter((p) => (type === DEBIT ? p.active : true))
+                      .map((player) => (
+                        <Label
+                          htmlFor={`player-radio-${player.id}`}
+                          key={`label-player-radio-${player.id}`}
+                        >
+                          <div className="flex items-center space-x-3 border p-5">
+                            <RadioGroupItem
+                              id={`player-radio-${player.id}`}
+                              value={player.id.toString()}
+                            />
+                            <span className="text-foreground">
+                              {player.name}
+                            </span>
+                          </div>
+                        </Label>
+                      ))}
                   </RadioGroup>
                 )}
               />

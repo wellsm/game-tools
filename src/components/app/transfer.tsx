@@ -50,11 +50,11 @@ export function Transfer({ players }: Props) {
   const onSubmit = ({ from, to, balance }: z.infer<typeof formSchema>) => {
     const sender: IPlayer = players
       .filter((p) => p.active)
-      .find((p) => p.id === Number(from)) as IPlayer;
+      .find((p) => p.id === from) as IPlayer;
 
     const receiver: IPlayer = players
       .filter((p) => p.active)
-      .find((p) => p.id === Number(to)) as IPlayer;
+      .find((p) => p.id === to) as IPlayer;
 
     updatePlayer({
       ...sender,
