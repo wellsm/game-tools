@@ -13,13 +13,16 @@ export function Players({ players, onRemovePlayer }: Props) {
   return (
     <div className="flex flex-col gap-2 w-full">
       {players
-        .map(({ name, icon }, i) => (
+        .map(({ name, icon, color }, i) => (
           <div
             key={`player-${i}`}
-            className="flex justify-between items-center px-4 py-2 bg-secondary rounded-lg"
+            className="flex justify-between items-center px-4 py-2 bg-secondary rounded-lg border-l-4"
+            style={{ borderLeftColor: color }}
           >
-            <DynamicIcon name={icon} size={20} className="text-foreground"/>
-            <span className="text-foreground">{name}</span>
+            <div className="flex items-center gap-3">
+              <DynamicIcon name={icon} size={20} className="text-foreground"/>
+              <span className="text-foreground">{name}</span>
+            </div>
             <Confirmation onConfirm={() => onRemovePlayer(i)}>
               <Button size="icon" variant="ghost" className="text-foreground">
                 <X className="w-4 h-4" />

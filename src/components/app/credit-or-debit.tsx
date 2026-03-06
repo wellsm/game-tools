@@ -85,13 +85,19 @@ export function CreditOrDebit({ players, type }: Props) {
     <Sheet onOpenChange={onOpenChange} open={open}>
       <SheetTrigger asChild>
         <Button
-          className="flex items-center gap-4 p-6 [&_svg]:size-6"
-          size="icon"
+          className="flex items-center gap-4 py-10 [&_svg]:size-8"
+          variant="secondary"
         >
           {type === CREDIT ? (
-            <Plus className="w-16 h-16" />
+            <div className="flex flex-col items-center justify-center py-4 gap-1">
+              <Plus className="size-16 bg-green-500 p-2" />
+              Adicionar
+            </div>
           ) : (
-            <Minus className="w-16 h-16" />
+            <div className="flex flex-col items-center justify-center py-4 gap-1">
+              <Minus className="size-16 bg-red-500 p-2" />
+              Remover
+            </div>
           )}
         </Button>
       </SheetTrigger>
@@ -161,7 +167,10 @@ export function CreditOrDebit({ players, type }: Props) {
                           htmlFor={`player-radio-${player.id}`}
                           key={`label-player-radio-${player.id}`}
                         >
-                          <div className="flex items-center space-x-3 border p-5">
+                          <div
+                            className="flex items-center space-x-3 border-l-4 border p-5"
+                            style={{ borderLeftColor: player.color }}
+                          >
                             <RadioGroupItem
                               id={`player-radio-${player.id}`}
                               value={player.id.toString()}

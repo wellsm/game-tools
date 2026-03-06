@@ -92,10 +92,13 @@ export function Transfer({ players }: Props) {
     <Sheet onOpenChange={onOpenChange} open={open}>
       <SheetTrigger asChild>
         <Button
-          className="flex items-center gap-2 p-6 [&_svg]:size-6"
-          size="icon"
+          className="flex items-center gap-2 py-10 [&_svg]:size-8"
+          variant="secondary"
         >
-          <ArrowLeftRight className="w-16 h-16" />
+          <div className="flex flex-col items-center justify-center py-4 gap-1">
+            <ArrowLeftRight className="size-24 bg-yellow-500 p-2" />
+            Transferir
+          </div>
         </Button>
       </SheetTrigger>
       <SheetContent side="bottom">

@@ -2,15 +2,26 @@ import { IconName } from "lucide-react/dynamic";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
+export const PLAYER_COLORS = [
+  "#ef4444",
+  "#3b82f6",
+  "#22c55e",
+  "#eab308",
+  "#a855f7",
+  "#f97316",
+];
+
 export type IAddPlayer = {
   name: string;
   icon: IconName;
+  color: string;
 };
 
 export type IPlayer = {
   id: string | number;
   name: string;
   icon: IconName;
+  color: string;
   balance: number;
   active: boolean;
 };

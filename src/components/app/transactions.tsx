@@ -8,16 +8,17 @@ type Transaction = {
 
 type Props = {
   transactions: Transaction[];
+  className?: string;
 };
 
-export function Transactions({ transactions }: Props) {
+export function Transactions({ transactions, className }: Props) {
   return (
-    <ScrollArea className="h-[28rem]">
+    <ScrollArea className={className ?? "h-[28rem]"}>
       <ul className="space-y-2">
         {transactions.map((transaction, index) => (
           <li
             key={index}
-            className="flex items-center justify-between p-2 bg-background/90 rounded-lg shadow-md"
+            className="flex items-center justify-between p-4 bg-background/90 rounded-lg shadow-md"
           >
             <span className="text-foreground/90 text-xs font-mono w-[90%]">
               {transaction.message}

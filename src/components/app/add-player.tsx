@@ -23,13 +23,14 @@ import {
 } from "../ui/form";
 import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
 import { Label } from "../ui/label";
-import { IAddPlayer } from "@/stores/game";
+import { IAddPlayer, PLAYER_COLORS } from "@/stores/game";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 
 const formSchema = z.object({
   name: z.string().min(2).max(12),
   icon: z.string(),
+  color: z.string().min(1),
 });
 
 type Props = {
@@ -47,8 +48,8 @@ export function AddPlayer({ players, onAddPlayer }: Props) {
     },
   });
 
-  function onSubmit({ name, icon }: z.infer<typeof formSchema>) {
-    onAddPlayer({ name, icon: icon as IconName });
+  function onSubmit({ name, icon, color }: z.infer<typeof formSchema>) {
+    onAddPlayer({ name, icon: icon as IconName, color });
 
     form.reset();
 
@@ -140,6 +141,37 @@ export function AddPlayer({ players, onAddPlayer }: Props) {
                     </Label>
                   ))}
                 </RadioGroup>
+              )}
+            />
+
+            <Controller
+              name="color"
+              control={form.control}
+              render={({ field }) => (
+                <div className="flex flex-col gap-2">
+                  <span className="text-sm font-medium text-foreground">Cor</span>
+                  <div className="flex gap-3">
+                    {PLAYER_COLORS.map((color) => {
+                      const taken = players.some((p) => p.color === color);
+                      return (
+                        <button
+                          key={color}
+                          type="button"
+                          disabled={taken}
+                          onClick={() => !taken && field.onChange(color)}
+                          className={cn(
+                            "w-9 h-9 rounded-full border-2 transition-all",
+                            field.value === color
+                              ? "border-foreground scale-110"
+                              : "border-transparent",
+                            taken && "opacity-30 cursor-not-allowed"
+                          )}
+                          style={{ backgroundColor: color }}
+                        />
+                      );
+                    })}
+                  </div>
+                </div>
               )}
             />
 
